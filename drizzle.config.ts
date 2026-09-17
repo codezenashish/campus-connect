@@ -7,7 +7,9 @@ export default defineConfig({
   out: "./drizzle",
   schema: "./src/db/schema.ts",
   dialect: "postgresql",
+  schemaFilter: ["public"],
   dbCredentials: {
-    url: process.env.DATABASE_URL!,
+    // Migrations/DDL require a direct connection (port 5432) or session mode
+    url: process.env.DIRECT_URL || process.env.DATABASE_URL!,
   },
 });
